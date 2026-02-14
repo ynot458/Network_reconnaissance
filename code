@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+
+import socket
+
+
+SERVICE_PORTS = {
+    21: "FTP",
+    22: "SSH",
+    25: "SMTP",
+    80: "HTTP",
+    443: "HTTPS",
+    3306: "MySQL",
+    6379: "Redis",
+
+    # Demo ports
+    2121: "FTP (Demo)",
+    2222: "SSH (Demo)",
+    2525: "SMTP (Demo)",
+    6380: "Redis (Demo)",
+    33060: "MySQL (Demo)",
+    8000: "HTTP (Demo)"
+}
+
+
+def get_service_name(port):
+    return SERVICE_PORTS.get(port, "Unknown")
+
+
+def grab_banner(sock, port):
+    banner = ""
+
+    try:
+        # Smart requests based on port
+        if port in [80, 8000, 8080]:
+            sock.send(b"GET / HTTP/1.1\r\nHost: localhost\r\n\r\n")
+        elif port in [21, 2121]:
+            pass
+        elif port in [22, 2222]:
+            pass
+        else:
+            sock.send(b"\r\n")
+
+        banner = sock.recv(1024).decode(errors="ignore").strip()
+
+        # Clean banner (first line only)
+        if "\n" in banner:
+            banner = banner.split("\n")[0]
+
+    except:
+        pass
+
+    return banner
+
+
+def scan_target(target_ip):
+    socket.setdefaulttimeout(0.2)
+
+    print(f"\nScanning {target_ip}...\n")
+
+    for port in range(1, 65536):
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            result = s.connect_ex((target_ip, port))
+
+            if result == 0:
+                service = get_service_name(port)
+                banner = grab_banner(s, port)
+
+                print(f"[OPEN] Port {port:<6} | Service: {service:<15} | Banner: {banner}")
+
+            s.close()
+
+        except KeyboardInterrupt:
+            print("\nStopped by user")
+            break
+        except:
+            pass
+
+    print("\nScan complete.\n")
+
+
+if __name__ == "__main__":
+    TARGET = "127.0.0.1"
+    scan_target(TARGET)
