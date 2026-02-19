@@ -1,17 +1,8 @@
-Here is your cleaned README formatted exactly as requested:
-
-* ✅ Only emojis in headings
-* ✅ All headings are H1 (`#`)
-* ✅ Clean GitHub-compatible Markdown
-
----
-
 # 🔎 Simple Python Port Scanner
 
 A lightweight TCP port scanner written in Python.
 This tool scans all 65,535 TCP ports on a target host, identifies common services, and performs basic banner grabbing.
 
-For educational and authorized testing purposes only.
 
 # ✨ Features
 
