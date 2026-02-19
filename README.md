@@ -31,9 +31,11 @@ Example output:
 [OPEN] Port 80     | Service: HTTP       | Banner: HTTP/1.1 200 OK
 ```
 
+
 ```
 
 # ▶️ Usage
+
 
 Run:
 
