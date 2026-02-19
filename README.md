@@ -31,13 +31,6 @@ Example output:
 [OPEN] Port 80     | Service: HTTP       | Banner: HTTP/1.1 200 OK
 ```
 
-# 🚀 Installation
-
-Clone the repository:
-
-```
-git clone https://github.com/yourusername/simple-port-scanner.git
-cd simple-port-scanner
 ```
 
 # ▶️ Usage
