@@ -1,11 +1,11 @@
-🔎 Simple Python Port Scanner
+Simple Python Port Scanner
 
 A lightweight TCP port scanner written in Python.
-This tool scans all 65,535 TCP ports on a target host, identifies common services, and performs basic banner grabbing for open ports.
+This tool scans all 65,535 TCP ports on a target host, identifies common services, and performs basic banner grabbing.
 
-⚠️ For educational and authorized testing purposes only.
+For educational and authorized testing purposes only.
 
-📌 Features
+Features
 
 Scans TCP ports 1–65535
 
@@ -17,90 +17,66 @@ Performs basic banner grabbing
 
 Smart probing for HTTP services
 
-Fast scanning with low timeout (0.2 seconds)
+Fast scanning with low timeout
 
-Graceful keyboard interrupt handling
+Handles Ctrl+C safely
 
-🛠 How It Works
+How It Works
 
 The scanner:
 
-Iterates through all TCP ports (1–65535)
+Loops through ports 1–65535
 
-Uses socket.connect_ex() to check if the port is open
+Uses socket.connect_ex() to check if a port is open
 
-Identifies the service using a predefined port dictionary
+Matches the port to a known service
 
-Attempts to grab a banner from the service
+Attempts to grab a banner
 
-Prints formatted results for open ports
+Prints formatted results
 
 Example output:
 
-[OPEN] Port 22     | Service: SSH             | Banner: SSH-2.0-OpenSSH_8.2
-[OPEN] Port 80     | Service: HTTP            | Banner: HTTP/1.1 200 OK
+[OPEN] Port 22     | Service: SSH        | Banner: SSH-2.0-OpenSSH_8.2
+[OPEN] Port 80     | Service: HTTP       | Banner: HTTP/1.1 200 OK
 
-🚀 Installation & Usage
-1️⃣ Clone the repository
+Installation
+
+Clone the repository:
+
 git clone https://github.com/yourusername/simple-port-scanner.git
 cd simple-port-scanner
 
-2️⃣ Run the scanner
+Usage
+
+Run:
+
 python3 scanner.py
 
 
-By default, it scans:
+By default, the script scans:
 
 127.0.0.1
 
 
-To change the target, edit this line in the script:
+To change the target, modify this line in the script:
 
 TARGET = "127.0.0.1"
 
-
-Replace it with your desired IP address.
-
-📂 Code Overview
-Service Mapping
-
-The scanner includes common service mappings:
-
-Port	Service
-21	FTP
-22	SSH
-25	SMTP
-80	HTTP
-443	HTTPS
-3306	MySQL
-6379	Redis
-
-It also includes demo ports for testing environments.
-
-Banner Grabbing
-
-Sends HTTP GET requests for web services
-
-Sends newline probes for other services
-
-Captures first line of the response
-
-Handles decoding errors gracefully
-
-⚙️ Configuration
+Configuration
 
 You can modify:
 
-Timeout value:
+Timeout:
 
 socket.setdefaulttimeout(0.2)
 
 
-Service dictionary:
+Service mapping dictionary:
 
-SERVICE_PORTS = {...}
-
-
-Target IP address:
-
-TARGET = "127.0.0.1"
+SERVICE_PORTS = {
+    21: "FTP",
+    22: "SSH",
+    80: "HTTP",
+    443: "HTTPS",
+}
